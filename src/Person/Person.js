@@ -24,6 +24,11 @@ const person = props => {
   //   }
   // `;
 
+  if (Math.random() > 0.7) {
+    throw new Error('Error');
+  }
+
+
   return (
     <div className={classes.Person}>
       <p onClick={props.click}>
