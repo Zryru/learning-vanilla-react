@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.module.css";
 import Person from "./Person/Person";
 // import Radium, { StyleRoot } from "radium";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 // Hooks way
 /* const App = props => {
@@ -54,19 +54,19 @@ import styled from "styled-components";
 // };
 */
 
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red': 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
+// const StyledButton = styled.button`
+//   background-color: ${props => props.alt ? 'red': 'green'};
+//   color: white;
+//   font: inherit;
+//   border: 1px solid blue;
+//   padding: 8px;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon': 'lightgreen'};;
-    color: black;
-  }
-`;
+//   &:hover {
+//     background-color: ${props => props.alt ? 'salmon': 'lightgreen'};;
+//     color: black;
+//   }
+// `;
 
 class App extends Component {
   state = {
@@ -126,6 +126,7 @@ class App extends Component {
     // };
 
     let persons = null;
+    let btnClasses = [classes.button];
 
     if (this.state.showPersons) {
       persons = (
@@ -148,26 +149,27 @@ class App extends Component {
       //   backgroundColor: "lightred",
       //   color: "black"
       // };
+      btnClasses.push(classes.red);
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      assignedClasses.push(classes.bold);
     }
-    // let classes = ['red', 'bold'].join(' ');
+    // let assignedClasses = ['red', 'bold'].join(' ');
 
     return (
       // <StyleRoot>
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(" ")}>Working!!!</p>
+        <p className={assignedClasses.join(" ")}>Working!!!</p>
         {/* <button style={style} onClick={() => this.switchNameHandler("Max!!!")}>
           Switch name
         </button> */}
-        <button  className="button" onClick={this.togglePersonsHandler}>
+        <button  className={btnClasses.join(" ")} onClick={this.togglePersonsHandler}>
           Toggle persons
         </button>
         {/* <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
