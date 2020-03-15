@@ -9,16 +9,25 @@ export default class Persons extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Persons.js] shouldComponentUpdate...");
-    return true;
+     return true;
+    // if (nextProps.persons !== this.props.persons) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("[Persons.js] getSnapshotBeforeUpdate...");
-    return {message: 'snapshot!'};
+    return { message: "snapshot!" };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("[Persons.js] componentDidUpdate...");
+  }
+
+  componentWillUnmount() {
+    console.log("[Persons.js] componentWillUnmount...");
   }
 
   render() {
@@ -34,6 +43,7 @@ export default class Persons extends Component {
               age={person.age}
               click={() => this.props.clicked(index)}
               change={event => this.props.changed(event, person.id)}
+              isAuth={this.props.isAuthenticated}
             ></Person>
           );
         })}

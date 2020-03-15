@@ -1,14 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.module.css";
 
 const Cockpit = props => {
-  useEffect(() => {
-    console.log('[Cockpit.js] useEffect ');
-    setTimeout(() => {
-      alert('saved!!!')
-    }, 1000);
+  const toggleBtnRef = useRef(null);
 
-  }, [props.persons]);
+  useEffect(() => {
+    console.log("[Cockpit.js] useEffect ");
+    toggleBtnRef.current.click();
+
+    // const timer = setTimeout(() => {
+    //   // alert("saved!!!");
+    // }, 1000);
+    return () => {
+      console.log("[Cockpit.js] clean up useEffect ");
+      // clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("[Cockpit.js] 2 useEffect ");
+    return () => {
+      console.log("[Cockpit.js] 2 clean up useEffect ");
+    };
+  });
 
   const assignedClasses = [];
   let btnClass = "";
@@ -17,10 +31,10 @@ const Cockpit = props => {
     btnClass = classes.red;
   }
 
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     assignedClasses.push(classes.red);
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignedClasses.push(classes.bold);
   }
 
@@ -28,11 +42,12 @@ const Cockpit = props => {
     <div className={classes.Cockpit}>
       <h1>Hi, I'm a React App {props.title}</h1>
       <p className={assignedClasses.join(" ")}>Working!!!</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
         Toggle persons
       </button>
+      <button onClick={props.login}>Log in</button>
     </div>
   );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
