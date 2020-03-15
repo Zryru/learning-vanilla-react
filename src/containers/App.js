@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./App.module.css";
 import Persons from "./../components/Persons/Persons";
 import Cockpit from "./../components/Cockpit/Cockpit";
-import Aux from "./../hoc/Aux";
+import Auxiliary from "./../hoc/Auxiliary";
 import withClass from "./../hoc/withClass";
 
 class App extends Component {
@@ -94,7 +94,7 @@ class App extends Component {
 
     return (
       // <div className={classes.App}>
-      <Aux>
+      <Auxiliary>
         <button
           onClick={() => {
             const bool = !this.state.showCockpit;
@@ -113,7 +113,7 @@ class App extends Component {
           ></Cockpit>
         ) : null}
         {persons}
-      </Aux>
+      </Auxiliary>
       // </div>
     );
   }
