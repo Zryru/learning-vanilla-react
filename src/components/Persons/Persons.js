@@ -9,7 +9,7 @@ export default class Persons extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[Persons.js] shouldComponentUpdate...");
-     return true;
+    return true;
     // if (nextProps.persons !== this.props.persons) {
     //   return true;
     // } else {
@@ -32,22 +32,16 @@ export default class Persons extends Component {
 
   render() {
     console.log("[Persons.js] rendering...");
-
-    return (
-      <div>
-        {this.props.persons.map((person, index) => {
-          return (
-            <Person
-              key={person.id}
-              name={person.name}
-              age={person.age}
-              click={() => this.props.clicked(index)}
-              change={event => this.props.changed(event, person.id)}
-              isAuth={this.props.isAuthenticated}
-            ></Person>
-          );
-        })}
-      </div>
-    );
+    return this.props.persons.map((person, index) => {
+      return (
+        <Person
+          key={person.id}
+          name={person.name}
+          age={person.age}
+          click={() => this.props.clicked(index)}
+          change={event => this.props.changed(event, person.id)}
+        ></Person>
+      );
+    });
   }
 }

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import classes from "./Person.module.css";
 import withClass from "../../../hoc/withClass";
 import PropTypes from "prop-types";
+import AuthContext from "../../../context/auth-context";
 
 class Person extends Component {
-
   constructor(props) {
     super(props);
     this.inputElementRef = React.createRef();
@@ -20,7 +20,11 @@ class Person extends Component {
 
     return (
       <React.Fragment>
-        {this.props.isAuth ? <p>Authenticated!</p> : <p>Please Log in</p>}
+        <AuthContext.Consumer>
+          {context =>
+            context.authenticated ? <p>Authenticated!</p> : <p>Please Log in</p>
+          }
+        </AuthContext.Consumer>
         <p onClick={this.props.click}>
           {this.props.name} of age {this.props.age}
         </p>
